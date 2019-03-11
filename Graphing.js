@@ -1,4 +1,4 @@
-var plotly = require('plotly')("dylan.fernando", "bw3N6vFq1B16GBieHe9B");
+var plotly = require('plotly')("***********", "***************");
 
 var trace1 = {
   x: [1, 3, 3, 1, 1],
