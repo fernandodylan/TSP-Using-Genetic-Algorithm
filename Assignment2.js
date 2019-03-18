@@ -21,6 +21,7 @@ class City{
 
 }
 
+//Class to create a fitness function for our population
 class Fitness{
   constructor(route){
     this.route = route;
@@ -33,9 +34,38 @@ class Fitness{
   }
 }
 
-var Mexico = new City("Mexico",12,4);
-var Canada = new City("Canada", -10, -20);
-var USA = new City("USA", 30, 145);
-Canada.getDistance(Mexico);
-USA.getDistance(Canada);
-console.log(Canada.getCoordinates(Canada));
+//Array Shuffling Function
+function shuffle (array) {
+  var i = 0
+    , j = 0
+    , temp = null
+
+  for (i = array.length - 1; i > 0; i -= 1) {
+    j = Math.floor(Math.random() * (i + 1))
+    temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+  return array
+}
+
+//Initialize the population of chromosomes 
+function initPopulation(){
+  
+  var population = new Array();
+  for(i = 0; i < 20; i++){
+    population.push(shuffle(city_list));
+    
+  }
+  return population
+}
+
+
+
+
+var city_list = new Array();
+city_list[0] = new City("Mexico",12,4);
+city_list[1] = new City("Canada", -10, -20);
+city_list[2] = new City("USA", 30, 145);
+
+console.log(initPopulation());
