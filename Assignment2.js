@@ -112,6 +112,18 @@ function selection(pop, fit) {
 
 //Function to create new chromosome based on two provided chromosomes
 function crossover(chromA, chromB) {
+	var r = Math.floor((Math.random()*(chromA.length-1))+1);// crossover point
+var newChrom = [];
+  for (i=0;i<r;i++)
+  {
+newChrom[i]=chromA[i];
+  }
+  for (i=r;i<chromB.length;i++)
+  {
+newChrom[i]=chromB[i];
+  }
+
+  return newChrom;
 
 }
 
