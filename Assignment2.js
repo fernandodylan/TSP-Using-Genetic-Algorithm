@@ -1,4 +1,4 @@
-var problemDomain = 1;
+var problemDomain = 2;
 
 var bestDistance = Infinity;
 var bestCromosome;
@@ -7,6 +7,16 @@ var city_list = [];
 var popSize = 20;
 var population = [];
 var fitness = [];
+
+//2d key-value array containing all distances for problem domain 2.
+var pD2Distances = { Brighton:  { Brighton: 0, Bristol: 172, Cambridge: 145, Glasgow: 607, Liverpool: 329, London: 72, Manchester: 312, Oxford: 120},
+					 Bristol:   { Brighton: 172, Bristol: 0, Cambridge: 192, Glasgow: 494, Liverpool: 209, London: 158, Manchester: 216, Oxford: 92},
+					 Cambridge: { Brighton: 145, Bristol: 192, Cambridge: 0, Glasgow: 490, Liverpool: 237, London: 75, Manchester: 205, Oxford: 100},
+					 Glasgow:   { Brighton: 607, Bristol: 494, Cambridge: 490, Glasgow: 0, Liverpool: 286, London: 545, Manchester: 296, Oxford: 489},
+					 Liverpool: { Brighton: 329, Bristol: 209, Cambridge: 237, Glasgow: 286, Liverpool: 0, London: 421, Manchester: 49, Oxford: 208},
+					 London:    { Brighton: 72, Bristol: 158, Cambridge: 75, Glasgow: 545, Liverpool: 421, London: 0, Manchester: 249, Oxford: 75},
+					 Manchester:{ Brighton: 312, Bristol: 216, Cambridge: 205, Glasgow: 296, Liverpool: 49, London: 249, Manchester: 0, Oxford: 194},
+					 Oxford:    { Brighton: 120, Bristol: 92, Cambridge: 100, Glasgow: 489, Liverpool: 208, London: 75, Manchester: 194, Oxford: 0} };
 
 
 class City{
@@ -27,14 +37,14 @@ class City{
 				return distance;
 				break;
 			case 2:
-				//Select distance from table in assignement 2 outline
+				return pD2Distances[this.name][city.getName()];
 				break;
 		}
 	}
   
-	//Returns the coordintes of the Location along with the name
-	getCoordinates(city) {
-		return [city.name, city.x, city.y];
+	//Returns the name of this city
+	getName() {
+		return this.name;
 	}
 }
 
@@ -113,18 +123,14 @@ function selection(pop, fit) {
 //Function to create new chromosome based on two provided chromosomes
 function crossover(chromA, chromB) {
 	var r = Math.floor((Math.random()*(chromA.length-1))+1);// crossover point
-var newChrom = [];
-  for (i=0;i<r;i++)
-  {
-newChrom[i]=chromA[i];
-  }
-  for (i=r;i<chromB.length;i++)
-  {
-newChrom[i]=chromB[i];
-  }
-
-  return newChrom;
-
+	var newChrom = [];
+	for (i=0;i<r;i++) {
+		newChrom[i]=chromA[i];
+	}
+	for (i=r;i<chromB.length;i++) {
+		newChrom[i]=chromB[i];
+	}
+	return newChrom;
 }
 
 
@@ -181,7 +187,7 @@ switch(problemDomain) {
 		city_list[1] = new City("Bristol", -1, -1);
 		city_list[2] = new City("Cambridge", -1, -1);
 		city_list[3] = new City("Glasgow", -1, -1);
-		city_list[4] = new City("Livepool", -1, -1);
+		city_list[4] = new City("Liverpool", -1, -1);
 		city_list[5] = new City("London", -1, -1);
 		city_list[6] = new City("Manchester", -1, -1);
 		city_list[7] = new City("Oxford", -1, -1);
@@ -189,3 +195,8 @@ switch(problemDomain) {
 
 initPopulation()
 getFitness()
+/* var a = selection(population, fitness)
+var b = selection(population, fitness)
+console.log(a)
+console.log(b)
+console.log(crossover(a, b)) */
