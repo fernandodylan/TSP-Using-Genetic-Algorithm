@@ -130,7 +130,7 @@ function selection(pop, fit) {
 	return pop[index].slice();
 }
 
-//Merges two chromosomes into one
+//Uses the Ordered Crossover (OX) method
 function crossover(chromA, chromB) {
 	//Gets two random values, first between 0 and chromA length - 1, second is between first+1 and chromA length -1
 	var s = Math.floor(Math.random()*(chromA.length));
