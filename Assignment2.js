@@ -1,7 +1,7 @@
-var problemDomain = 1;
+var problemDomain = 2;
 
 var bestDistance = Infinity;
-var bestCromosome;
+var bestChromosome;
 
 var city_list = [];
 var popSize = 20;
@@ -68,7 +68,7 @@ function getFitness() {
 		//If the total distance for that order of cities is better than the best, save it
 		if (totalDistance < bestDistance) {
 			bestDistance = totalDistance;
-			bestCromosome = population[i];
+			bestChromosome = population[i];
 		}
 		//Sets the raw fitness in it's own array. The raw fitness is calculated as a simple inverse of the total distance. 
 		fitness[i] = 1/totalDistance;
@@ -123,7 +123,6 @@ function selection(pop, fit) {
 function crossover(chromA, chromB) {
 	var s = Math.floor(Math.random()*(chromA.length));
 	var e = Math.floor(Math.random()*(chromA.length - s - 1))+s+1;
-	console.log(s, e)
 	var newChrom = chromA.slice(s, e);
 	for (var i = 0; i < chromB.length; i++) {
 		var city = chromB[i];
@@ -138,8 +137,8 @@ function crossover(chromA, chromB) {
 function mutate(chrom) {
 	var a = Math.floor(Math.random() * chrom.length)
 	var b = Math.floor(Math.random() * chrom.length)
-	var temp = pop[i][a]
-	chrom[a] = pop[i][b]
+	var temp = chrom[a]
+	chrom[a] = chrom[b]
 	chrom[b] = temp
 }
 
@@ -194,4 +193,9 @@ switch(problemDomain) {
 }
 
 initPopulation()
-getFitness()
+for (var i = 0; i < 50; i++) {
+	getFitness()
+	newGeneration()
+}
+console.log(bestDistance)
+console.log(bestChromosome)
