@@ -158,6 +158,8 @@ function mutate(chrom) {
 	chrom[b] = temp
 }
 
+//Mutates chromosome with 'Reverse Sequence Mutation'
+//Takes random section and reverses it.
 function mutate2(chrom) {
 	var i = Math.floor(Math.random() * chrom.length)
 	var j = Math.floor(Math.random() * chrom.length)
