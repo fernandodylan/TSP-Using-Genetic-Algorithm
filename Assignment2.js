@@ -1,4 +1,4 @@
-var problemDomain = 2;
+var problemDomain = 1;
 
 var bestDistance = Infinity;
 var bestCromosome;
@@ -120,19 +120,19 @@ function selection(pop, fit) {
 	return pop[index].slice();
 }
 
-//Function to create new chromosome based on two provided chromosomes
 function crossover(chromA, chromB) {
-	var r = Math.floor((Math.random()*(chromA.length-1))+1);// crossover point
-	var newChrom = [];
-	for (i=0;i<r;i++) {
-		newChrom[i]=chromA[i];
-	}
-	for (i=r;i<chromB.length;i++) {
-		newChrom[i]=chromB[i];
+	var s = Math.floor(Math.random()*(20));
+	var e = Math.floor(Math.random()*(20 - s - 1))+s+1;
+	console.log(s, e)
+	var newChrom = chromA.slice(s, e);
+	for (var i = 0; i < chromB.length; i++) {
+		var city = chromB[i];
+		if (!newChrom.includes(city)) {
+			newChrom.push(city);
+		}
 	}
 	return newChrom;
 }
-
 
 //Mutates the 'chromosome' by randomly swaping two cities
 function mutate(chrom) {
@@ -195,8 +195,3 @@ switch(problemDomain) {
 
 initPopulation()
 getFitness()
-/* var a = selection(population, fitness)
-var b = selection(population, fitness)
-console.log(a)
-console.log(b)
-console.log(crossover(a, b)) */
