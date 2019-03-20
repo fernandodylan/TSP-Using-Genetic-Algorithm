@@ -68,15 +68,41 @@ function getFitness() {
 	}
 }
 
-//Mutates the population by randomly swaping two cities in the order
-function mutate(pop) {
-	for (var i = 0; i < popSize; i++) {
-		var a = Math.floor(Math.random() * pop[i].length)
-		var b = Math.floor(Math.random() * pop[i].length)
-		var temp = pop[i][a]
-		pop[i][a] = pop[i][b]
-		pop[i][b] = temp
+//Function to create new generation of the population
+function newGeneration() {
+	var newPop = [];
+	for(i = 0; i < popSize; i++){
+		//Selects two random chromosomes from the current population, based on the fitness.
+		var chromA = selection(population, fitness);
+		var chromB = selection(population, fitness);
+		//Uses crossover function to combine traits of both selected chromosomes
+		var newChrom = crossover(chromA, chromB);
+		//Mutates the newly created chromosome using mutate function
+		mutate(newChrom);
+		//Adds new chromosome to the new population
+		newPop[i] = newChrom;
 	}
+	population = newPop;
+}
+
+//Function to select a chromosome from the population based on fitness
+function selection(pop, fit) {
+	
+}
+
+//Function to create new chromosome based on two provided chromosomes
+function crossover(chromA, chromB) {
+	
+}
+
+
+//Mutates the 'chromosome' by randomly swaping two cities
+function mutate(chrom) {
+	var a = Math.floor(Math.random() * chrom.length)
+	var b = Math.floor(Math.random() * chrom.length)
+	var temp = pop[i][a]
+	chrom[a] = pop[i][b]
+	chrom[b] = temp
 }
 
 
@@ -111,4 +137,3 @@ initPopulation()
 console.log(population);
 getFitness();
 console.log(fitness);
-//mutate(population);
