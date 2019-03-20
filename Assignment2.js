@@ -121,8 +121,8 @@ function selection(pop, fit) {
 }
 
 function crossover(chromA, chromB) {
-	var s = Math.floor(Math.random()*(20));
-	var e = Math.floor(Math.random()*(20 - s - 1))+s+1;
+	var s = Math.floor(Math.random()*(chromA.length));
+	var e = Math.floor(Math.random()*(chromA.length - s - 1))+s+1;
 	console.log(s, e)
 	var newChrom = chromA.slice(s, e);
 	for (var i = 0; i < chromB.length; i++) {
