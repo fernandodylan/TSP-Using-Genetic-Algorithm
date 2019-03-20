@@ -232,7 +232,7 @@ function graphSolution(bestChromosome){
 }
 
 initPopulation()
-while(bestSolutionAge < 1000) {
+while(bestSolutionAge < 2000) {
 	getFitness()
 	newGeneration()
 	bestSolutionAge++
