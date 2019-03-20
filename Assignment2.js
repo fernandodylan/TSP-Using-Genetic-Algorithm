@@ -99,7 +99,8 @@ function getFitness() {
 //Function to create new generation of the population
 function newGeneration() {
 	var newPop = [];
-	for(i = 0; i < popSize; i++){
+	newPop[0] = bestChromosome.slice();
+	for(i = 1; i < popSize; i++){
 		//Selects two random chromosomes from the current population, based on the fitness.
 		var chromA = selection(population, fitness);
 		var chromB = selection(population, fitness);
