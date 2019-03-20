@@ -1,4 +1,4 @@
-var problemDomain = 2;
+var problemDomain = 1;
 
 var bestDistance = Infinity;
 var bestChromosome;
@@ -45,6 +45,10 @@ class City{
 	//Returns the name of this city
 	getName() {
 		return this.name;
+	}
+	
+	getCoords() {
+		return [this.x, this.y];
 	}
 }
 
@@ -120,10 +124,14 @@ function selection(pop, fit) {
 	return pop[index].slice();
 }
 
+//Merges two chromosomes into one
 function crossover(chromA, chromB) {
+	//Gets two random values, first between 0 and chromA length - 1, second is between first+1 and chromA length -1
 	var s = Math.floor(Math.random()*(chromA.length));
 	var e = Math.floor(Math.random()*(chromA.length - s - 1))+s+1;
+	//Takes that section of chromA and adds it to newChrom
 	var newChrom = chromA.slice(s, e);
+	//Loops through every city in order of chromB, and if it is not already in newChrom, adds it
 	for (var i = 0; i < chromB.length; i++) {
 		var city = chromB[i];
 		if (!newChrom.includes(city)) {
@@ -193,7 +201,7 @@ switch(problemDomain) {
 }
 
 initPopulation()
-for (var i = 0; i < 50; i++) {
+for (var i = 0; i < 20; i++) {
 	getFitness()
 	newGeneration()
 }
