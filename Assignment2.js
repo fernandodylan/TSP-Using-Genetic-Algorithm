@@ -1,8 +1,10 @@
+var plotly = require('plotly')("dylan.fernando", "bw3N6vFq1B16GBieHe9B");
 var problemDomain = 1;
 
 var bestDistance = Infinity;
 var bestChromosome;
-
+var solutionx = []
+var solutiony = []
 var city_list = [];
 var popSize = 20;
 var population = [];
@@ -200,10 +202,36 @@ switch(problemDomain) {
 		city_list[7] = new City("Oxford", -1, -1);
 }
 
+function graphSolution(bestChromosome){
+  for(i = 0; i < 20; i++){
+    solutionx.push(bestChromosome[i].x);
+  }
+  for(i = 0; i < 20; i++){
+    solutiony.push(bestChromosome[i].y);
+  }
+
+  var trace1 = {
+    x: solutionx,
+    y: solutiony,
+    type: "scatter"
+  };
+  
+  
+  
+  var data = [trace1];
+  var graphOptions = {filename: "TSP Genetic Algorithm", fileopt: "overwrite"};
+  
+  plotly.plot(data, graphOptions, function (err, msg) {
+      console.log(msg);
+  });
+  
+}
+
 initPopulation()
-for (var i = 0; i < 20; i++) {
+for (var counter = 0; counter < 10000; counter++) {
 	getFitness()
 	newGeneration()
 }
 console.log(bestDistance)
 console.log(bestChromosome)
+graphSolution(bestChromosome)
