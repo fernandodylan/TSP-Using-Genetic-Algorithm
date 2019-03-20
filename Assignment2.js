@@ -1,4 +1,4 @@
-var plotly = require('plotly')("dylan.fernando", "bw3N6vFq1B16GBieHe9B");
+var plotly = require('plotly')("dylan.fernando", "key");
 var problemDomain = 1;
 
 var bestDistance = Infinity;
