@@ -3,8 +3,11 @@ var problemDomain = 1;
 
 var bestDistance = Infinity;
 var bestChromosome;
+var bestSolutionAge = 0; 
+
 var solutionx = []
 var solutiony = []
+
 var city_list = [];
 var popSize = 20;
 var population = [];
@@ -75,6 +78,7 @@ function getFitness() {
 		if (totalDistance < bestDistance) {
 			bestDistance = totalDistance;
 			bestChromosome = population[i];
+			bestSolutionAge = 0;
 		}
 		//Sets the raw fitness in it's own array. The raw fitness is calculated as a simple inverse of the total distance. 
 		fitness[i] = 1/totalDistance;
@@ -228,9 +232,10 @@ function graphSolution(bestChromosome){
 }
 
 initPopulation()
-for (var counter = 0; counter < 10000; counter++) {
+while(bestSolutionAge < 1000) {
 	getFitness()
 	newGeneration()
+	bestSolutionAge++
 }
 console.log(bestDistance)
 console.log(bestChromosome)
