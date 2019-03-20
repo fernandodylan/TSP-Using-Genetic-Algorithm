@@ -158,6 +158,17 @@ function mutate(chrom) {
 	chrom[b] = temp
 }
 
+function mutate2(chrom) {
+	var i = Math.floor(Math.random() * chrom.length)
+	var j = Math.floor(Math.random() * chrom.length)
+	var higher = Math.max(i,j)
+	var lower = Math.min(i,j)
+	
+	var newArray = chrom.slice(lower, higher+1).reverse()
+	for (var i = 0; i < newArray.length; i++) {
+		chrom[i+lower] = newArray[i];
+	}
+}
 
 //Array Shuffling Function
 function shuffle (array) {
