@@ -1,3 +1,5 @@
+var problemDomain = 1;
+
 var bestDistance = Infinity;
 var bestCromosome;
 
@@ -8,34 +10,40 @@ var fitness = [];
 
 
 class City{
-  //Set the object with a name and x,y coordinates 
-  constructor(name,x,y){
-    this.x = x;
-    this.y = y;
-    this.name = name;
-  }
+	//Set the object with a name and x,y coordinates 
+	constructor(name,x,y) {
+		this.x = x;
+		this.y = y;
+		this.name = name;
+	}
 
-  //Calculates the distance between the object Location and another location on a cartesian plane
-  getDistance(city){
-    var xDistance = Math.abs(this.x - city.x);
-    var yDistance = Math.abs(this.y - city.y);
-    var distance = Math.sqrt((Math.pow(xDistance, 2) + Math.pow(yDistance, 2)));
-    //console.log(distance);
-	return distance;
-  }
-  //Returns the coordintes of the Location along with the name
-  getCoordinates(city){
-    return [city.name, city.x, city.y];
-  }
-
+	//Calculates the distance between the object Location and another location on a cartesian plane
+	getDistance(city) {
+		switch(problemDomain) {
+			case 1:
+				var xDistance = Math.abs(this.x - city.x);
+				var yDistance = Math.abs(this.y - city.y);
+				var distance = Math.sqrt((Math.pow(xDistance, 2) + Math.pow(yDistance, 2)));
+				return distance;
+				break;
+			case 2:
+				//Select distance from table in assignement 2 outline
+				break;
+		}
+	}
+  
+	//Returns the coordintes of the Location along with the name
+	getCoordinates(city) {
+		return [city.name, city.x, city.y];
+	}
 }
 
 //Initialize the population of chromosomes 
 function initPopulation(){
-  for(i = 0; i < popSize; i++){
-	population[i] = city_list.slice();
-	shuffle(population[i]);
-  }
+	for(i = 0; i < popSize; i++){
+		population[i] = city_list.slice();
+		shuffle(population[i]);
+	}
 }
 
 //Gets an array of equal length to population, with value between 0 and 1 for each permutation of city_list
@@ -104,7 +112,7 @@ function selection(pop, fit) {
 
 //Function to create new chromosome based on two provided chromosomes
 function crossover(chromA, chromB) {
-	
+
 }
 
 
@@ -120,30 +128,52 @@ function mutate(chrom) {
 
 //Array Shuffling Function
 function shuffle (array) {
-  var i = 0
-    , j = 0
-    , temp = null
+	var i = 0
+		, j = 0
+		, temp = null
 
-  for (i = array.length - 1; i > 0; i -= 1) {
-    j = Math.floor(Math.random() * (i + 1))
-    temp = array[i]
-    array[i] = array[j]
-    array[j] = temp
-  }
-  return array
+	for (i = array.length - 1; i > 0; i -= 1) {
+		j = Math.floor(Math.random() * (i + 1))
+		temp = array[i]
+		array[i] = array[j]
+		array[j] = temp
+	}
+	return array
 }
 
-
-city_list[0] = new City("a",12,4);
-city_list[1] = new City("b", -10, -20);
-city_list[2] = new City("c", 30, 145);
-city_list[3] = new City("d",132,35);
-city_list[4] = new City("e", -32, -434);
-city_list[5] = new City("f", 56, 82);
-city_list[6] = new City("g",44,453);
-city_list[7] = new City("h", -160, -333);
-city_list[8] = new City("i", 340, 733);
-city_list[9] = new City("j",122,4);
+switch(problemDomain) {
+	case 1:
+		city_list[0] = new City("a", 60, 200);
+		city_list[1] = new City("b", 180, 200);
+		city_list[2] = new City("c", 80, 180);
+		city_list[3] = new City("d", 140, 180);
+		city_list[4] = new City("e", 20, 160);
+		city_list[5] = new City("f", 100, 160);
+		city_list[6] = new City("g", 200, 160);
+		city_list[7] = new City("h", 140, 140);
+		city_list[8] = new City("i", 40, 120);
+		city_list[9] = new City("j", 100, 120);
+		city_list[10] = new City("k", 180, 100);
+		city_list[11] = new City("l", 60, 80);
+		city_list[12] = new City("m", 120, 80);
+		city_list[13] = new City("n", 180, 60);
+		city_list[14] = new City("o", 20, 40);
+		city_list[15] = new City("p", 100, 40);
+		city_list[16] = new City("q", 200, 40);
+		city_list[17] = new City("r", 20, 20);
+		city_list[18] = new City("s", 60, 20);
+		city_list[19] = new City("t", 160, 20);
+		break;
+	case 2:
+		city_list[0] = new City("Brighton", -1, -1);
+		city_list[1] = new City("Bristol", -1, -1);
+		city_list[2] = new City("Cambridge", -1, -1);
+		city_list[3] = new City("Glasgow", -1, -1);
+		city_list[4] = new City("Livepool", -1, -1);
+		city_list[5] = new City("London", -1, -1);
+		city_list[6] = new City("Manchester", -1, -1);
+		city_list[7] = new City("Oxford", -1, -1);
+}
 
 initPopulation()
 getFitness()
