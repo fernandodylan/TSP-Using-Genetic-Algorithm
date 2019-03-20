@@ -133,7 +133,7 @@ function crossover(chromA, chromB) {
 	var e = Math.floor(Math.random()*(chromA.length - s - 1))+s+1;
 	//Takes that section of chromA and adds it to newChrom
 	var newChrom = chromA.slice(s, e);
-	//Loops through every city in order of chromB, and if it is not already in newChrom, adds it
+	//Loops through every city, in order, of chromB, and if it is not already in newChrom, adds it
 	for (var i = 0; i < chromB.length; i++) {
 		var city = chromB[i];
 		if (!newChrom.includes(city)) {
