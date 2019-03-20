@@ -1,6 +1,7 @@
 var bestDistance = Infinity;
 var bestOrder;
 
+var city_list = [];
 var popSize = 20;
 var population = [];
 var fitness = [];
@@ -32,8 +33,8 @@ class City{
 //Initialize the population of chromosomes 
 function initPopulation(){
   for(i = 0; i < popSize; i++){
-    //population.push(shuffle(city_list));
-	population[i] = shuffle(city_list);
+	population[i] = city_list.slice();
+	shuffle(population[i]);
   }
 }
 
@@ -67,6 +68,18 @@ function getFitness() {
 	}
 }
 
+//Mutates the population by randomly swaping two cities in the order
+function mutate(pop) {
+	for (var i = 0; i < popSize; i++) {
+		var a = Math.floor(Math.random() * pop[i].length)
+		var b = Math.floor(Math.random() * pop[i].length)
+		var temp = pop[i][a]
+		pop[i][a] = pop[i][b]
+		pop[i][b] = temp
+	}
+}
+
+
 //Array Shuffling Function
 function shuffle (array) {
   var i = 0
@@ -83,8 +96,6 @@ function shuffle (array) {
 }
 
 
-
-var city_list = new Array();
 city_list[0] = new City("a",12,4);
 city_list[1] = new City("b", -10, -20);
 city_list[2] = new City("c", 30, 145);
@@ -100,3 +111,4 @@ initPopulation()
 console.log(population);
 getFitness();
 console.log(fitness);
+//mutate(population);
