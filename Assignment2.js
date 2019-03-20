@@ -1,5 +1,5 @@
 var bestDistance = Infinity;
-var bestOrder;
+var bestCromosome;
 
 var city_list = [];
 var popSize = 20;
@@ -50,7 +50,7 @@ function getFitness() {
 		//If the total distance for that order of cities is better than the best, save it
 		if (totalDistance < bestDistance) {
 			bestDistance = totalDistance;
-			bestOrder = population[i];
+			bestCromosome = population[i];
 		}
 		//Sets the raw fitness in it's own array. The raw fitness is calculated as a simple inverse of the total distance. 
 		fitness[i] = 1/totalDistance;
@@ -134,6 +134,4 @@ city_list[8] = new City("i", 340, 733);
 city_list[9] = new City("j",122,4);
 
 initPopulation()
-console.log(population);
 getFitness();
-console.log(fitness);
