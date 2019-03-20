@@ -87,7 +87,19 @@ function newGeneration() {
 
 //Function to select a chromosome from the population based on fitness
 function selection(pop, fit) {
-	
+	var r = Math.random();
+	var v = 0;
+	var index = 0;
+	//While the value counter, 'v', is less than the random value 'r'
+	while (v < r) {
+		//Adds the fitness value (number between 0 and 1, sum of all fitness = 1) to value counter
+		v += fit[index];
+		index++;
+	}
+	//While loop exits when the total fitness values checked > the random number generated
+	//The fitness value that pushed v > r is the selected chromosome
+	index--;
+	return pop[index].slice();
 }
 
 //Function to create new chromosome based on two provided chromosomes
@@ -134,4 +146,4 @@ city_list[8] = new City("i", 340, 733);
 city_list[9] = new City("j",122,4);
 
 initPopulation()
-getFitness();
+getFitness()
